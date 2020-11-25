@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>Convert Video</title>
+    <meta charset="utf-8">
+    <title>字符视频转换</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Upload your video here</h1>
+<h1>上传视频</h1>
 <form enctype="multipart/form-data" method="post">
 {% csrf_token %}
-    {{ form }}
+    <p>
+        {{ form.file.label_tag }}{{ form.file }}
+    </p>
+    <p>
+        {{ form.audio }}
+        <label for="{{ form.audio.id_for_label }}">{{ form.audio.label }}</label>
+    </p>
     <input type="submit">
 </form>
 

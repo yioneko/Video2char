@@ -15,12 +15,14 @@ def process_video(request):
         form = VideoForm(request.POST, request.FILES)
         if form.is_valid():
             video_file = request.FILES['file']
-            audio = form.cleaned_data['audio']
-            path = f'{settings.BASE_DIR}/convertVideo/cache/{datetime.now().strftime("%Y%m%d%H%M%S")}/'
             video_name = video_file.name
+            audio = form.cleaned_data['audio']
+
+            path = f'{settings.BASE_DIR}/convertVideo/cache/{datetime.now().strftime("%Y%m%d%H%M%S")}/'
             os.makedirs(path)  # create cache
+
             with open(path + video_name, 'wb+') as f:
-                f.write(video_file.read())
+                f.write(video_file.read())  # write the uploaded video to server's cache
 
             converted = cvt(path, video_name, audio)
             shutil.rmtree(path)  # clear cache
