@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>Convert Video</title>
+</head>
+<body>
+
+<h1>Upload your video here</h1>
+<form enctype="multipart/form-data" method="post">
+{% csrf_token %}
+    {{ form }}
+    <input type="submit">
+</form>
+
+</body>
+</html>
