@@ -1,4 +1,5 @@
 import cv2
+import os
 from PIL import Image, ImageDraw, ImageFont
 from moviepy.editor import *
 
@@ -29,7 +30,7 @@ def frame2img(path, frame, cur):
 
 
 def cvt(path, video_name, audio):
-    converted_name = os.path.splitext(video_name)[0] + '_converted.avi'
+    converted_name = os.path.splitext(video_name)[0] + '_converted.mp4'
 
     video = cv2.VideoCapture(f'{path}/{video_name}')
     if video.isOpened():
@@ -62,5 +63,12 @@ def add_audio(path, video_name, converted_name):
     video = VideoFileClip(f'{path}/{video_name}')
     converted_video = VideoFileClip(f'{path}/{converted_name}')
     audio = video.audio
-    converted_video.set_audio(audio)
-    converted_video.write_videofile(f'{path}/{converted_name}')
+    converted_video = converted_video.set_audio(audio)
+    converted_video.write_videofile(f'{path}/converted_with_audio_temp.mp4')
+    # 不能直接写入原文件
+
+    video.close()
+    converted_video.close()
+
+    os.remove(f'{path}/{converted_name}')
+    os.rename(f'{path}/converted_with_audio_temp.mp4', f'{path}/{converted_name}')
