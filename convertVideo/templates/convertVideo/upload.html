@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>字符视频转换</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: grey;
+            border: 2px solid black;
+            border-radius: 5px;
+            padding: 2px;
+            box-shadow: 2px 2px 2px teal;
+        }
+
+        a:hover {
+            color: cadetblue;
+        }
+
+        a:active {
+            color: orangered;
+            position: relative;
+            top: 1px;
+            left: 1px;
+        }
+
+    </style>
+</head>
+<body>
+    <h2>字符视频转换</h2>
+    <a id="prefLink" href="{% url 'preference' %}" target="_blank">选项</a>
+    <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <p>
+            {{ VideoForm.file.label_tag }}{{ VideoForm.file }}
+        </p>
+        <input type="hidden" name="form_type" value="video">
+        <input type="submit">
+    </form>
+</body>
+</html>
