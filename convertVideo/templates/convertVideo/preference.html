@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>字符视频转换</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>选项</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <p>
+            {{ PreferenceForm.format_choice.label_tag }}{{ PreferenceForm.format_choice }}
+        </p>
+        <p>
+            {{ PreferenceForm.background_color.label_tag }}{{ PreferenceForm.background_color }}
+        </p>
+        <p>
+            {{ PreferenceForm.char_color.label_tag }}{{ PreferenceForm.char_color }}
+        </p>
+        <p>
+            在{{ PreferenceForm.refer_dimension }}上输出{{ PreferenceForm.char_number }}个字符
+        <p>
+            {{ PreferenceForm.audio }}
+            <label for="{{ PreferenceForm.audio.id_for_label }}">{{ PreferenceForm.audio.label }}</label>
+        </p>
+        <input type="hidden" name="form_type" value="preference">
+        <input type="submit" value="保存">
+    </form>
+</body>
+</html>
